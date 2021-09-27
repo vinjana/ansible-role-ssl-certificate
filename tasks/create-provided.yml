@@ -1,0 +1,28 @@
+---
+# Create from content of variable e.g. from vault
+# Only the key needs to be kept private
+
+- name: write SSL public certificate
+  copy:
+    content: "{{ ssl_certificate_public_content }}"
+    dest: "{{ ssl_certificate_public_path }}"
+    mode: 0444
+  when: 'ssl_certificate_public_content | length > 0'
+  notify: ssl certificate changed
+
+- name: write SSL intermediate certificate
+  copy:
+    content: "{{ ssl_certificate_intermediate_content }}"
+    dest: "{{ ssl_certificate_intermediate_path }}"
+    mode: 0444
+  when: 'ssl_certificate_intermediate_content | length > 0'
+  notify: ssl certificate changed
+
+- name: write SSL certificate key
+  copy:
+    content: "{{ ssl_certificate_key_content }}"
+    dest: "{{ ssl_certificate_key_path }}"
+    mode: 0400
+  no_log: true
+  when: 'ssl_certificate_key_content | length > 0'
+  notify: ssl certificate changed

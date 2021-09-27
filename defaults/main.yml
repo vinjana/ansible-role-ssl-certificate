@@ -1,5 +1,6 @@
 ---
-# defaults file for roles/ssl-certificates
+# Whether to install openssl (requires sudo rights).
+ssl_certificate_install_openssl: true
 
 # Server path to SSL public certificate
 ssl_certificate_public_path: /etc/ssl/localcerts/server.crt
@@ -16,6 +17,7 @@ ssl_certificate_key_path: /etc/ssl/localcerts/server.key
 # Server path to SSL combined certificate and key, set to empty to disable
 ssl_certificate_combined_path: /etc/ssl/localcerts/combined.pem
 
+## Use a provided certificate.
 # Text content of the public certificate
 ssl_certificate_public_content: ''
 
@@ -25,6 +27,7 @@ ssl_certificate_intermediate_content: ''
 # Text content of the certificate key
 ssl_certificate_key_content: ''
 
+## Create a self-signed certificate.
 # Create a self-signed certificate if necessary
 ssl_certificate_selfsigned_create: true
 
@@ -34,3 +37,6 @@ ssl_certificate_selfsigned_subject: |-
 
 # Certificate validity (days)
 ssl_certificate_selfsigned_days: 365
+
+# Set addext parameters
+ssl_certificate_selfsigned_addexts: []
